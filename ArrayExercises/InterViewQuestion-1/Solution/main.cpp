@@ -37,6 +37,7 @@ bool findingMatch(char *arrA, char *arrB, int sizeA, int sizeB) {
 
 /* O(sizeA + sizeB) time complexity and  and O(sizeA) space complexity */
 bool betterFindingMatch(char *arrA, char *arrB, int sizeA, int sizeB) {
+    //GVG: I would use unordered_map here because hash table vs red-black trees
     map<int, int>lookUp;
     for(int i = 0; i < sizeA; i++) {
         if(lookUp.find(arrA[i]) == lookUp.end()) {
