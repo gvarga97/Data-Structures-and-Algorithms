@@ -104,7 +104,8 @@ int main() {
 
     h.display();
 
-    cout<<h.get(2);
+    cout<<h.get(2)<<endl;
+    cout<<h.get(3)<<endl;
 
     return 0;
 
