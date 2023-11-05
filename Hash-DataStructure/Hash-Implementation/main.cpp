@@ -41,9 +41,13 @@ public:
     // creating a function for inserting the key, value pair in hash table
     void insertElement(int key, int value) {
         int h = hashFunction(key);
+        //This while loop checks if the slot at index h is already occupied and if the key stored there is not equal to the key being inserted. 
+        //If the slot is occupied and the keys are different, it means a collision has occurred. 
         while(arr[h] != NULL && arr[h]->key != key) {
             h = hashFunction(h + 1);
         }
+        //After the while loop exits, if arr[h] is not NULL, it means that the key being inserted already exists in the hash table. 
+        //In this case, the existing key-value pair is deleted (since we're updating it), and then the new key-value pair is added.
         if(arr[h] != NULL) {  // if the key is already present then delete the (key, value) pair
             delete arr[h];
         }
