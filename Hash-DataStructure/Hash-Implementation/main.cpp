@@ -56,6 +56,7 @@ public:
 
     int get(int key) {
         int h = hashFunction(key);
+        //Again, dealing with hash collisions
         while(arr[h] != NULL && arr[h]->key != key) {
             h = hashFunction(h + 1);
         }
