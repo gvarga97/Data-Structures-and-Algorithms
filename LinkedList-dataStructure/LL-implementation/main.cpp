@@ -6,18 +6,18 @@ using namespace std;
 /* 
 we consider a node with two properties
 1. Data(now integer)
-2. link containing the address of the other node that it points.
+2. next containing the address of the other node that it points.
 */
 
 class Node
 {
 public:
     int data;
-    Node *link;
+    Node *next;
     Node(int data)
     {
         this->data = data; // assigning data
-        this->link = NULL; // initialize link to null
+        this->next = NULL; // initialize next to null
     }
 };
 
@@ -54,7 +54,7 @@ public:
         }
 
         // link the newNode with the tail via pointer reference and assign the newNode as tail
-        tail->link = newNode;
+        tail->next = newNode;
         tail = newNode;
         totalNodes++;
     }
@@ -76,7 +76,7 @@ public:
         }
 
         // link the newNode with exisiting head node and assign the head to the newNode
-        newNode->link = head;
+        newNode->next = head;
         head = newNode;
         totalNodes++;
     }
@@ -107,23 +107,23 @@ public:
             // we are finding the previous node w.r.t to position where we have to insert our node
             for (int i = 0; i < pos - 1; i++)
             {
-                prev = prev->link;
+                prev = prev->next;
             }
 
             /* 
             for simplicity lets consider, here we have 3 nodes 
-            [data, link] = [data, pointer reference to next node]
+            [data, next] = [data, pointer reference to next node]
             1 - prev node that we found [data,link to next node]
             2 - the next node w.r.t prev node [data, link to next node / null]
-            3 - the newNode that we have to insert [data,link] after prev node
+            3 - the newNode that we have to insert [data,next] after prev node
             */
 
             // assigning prevNode's pointer refernce to newly created node's pointer reference
             // so that newly created node points towards the next node where prev node was pointing previously
-            newNode->link = prev->link;
+            newNode->next = prev->next;
 
             // now in prevNode's pointer reference we will assign the reference of newly created node
-            prev->link = newNode;
+            prev->next = newNode;
 
             /*
             prev node                    new node                       next node
@@ -145,7 +145,7 @@ public:
         Node *temp = head;
         if (pos == 1)
         {
-            head = head->link;
+            head = head->next;
             free(temp);
             totalNodes--;
             return;
@@ -154,24 +154,24 @@ public:
         // traverse to the position just before the node that is to be deleted
         for (int i = 1; temp != NULL && i < pos - 1; i++)
         {
-            temp = temp->link;
+            temp = temp->next;
         }
 
         // check if the temp or pointer reference is null or not
         // if it is true it means that the node which is to be deleted is not present
-        if (temp == NULL || temp->link == NULL)
+        if (temp == NULL || temp->next == NULL)
         {
             return;
         }
 
-        // creating link between temp and node after the node that is being deleted.
-        Node *link = temp->link->link;
+        // creating next between temp and node after the node that is being deleted.
+        Node *next = temp->next->next;
 
         // delete the pointer reference
-        free(temp->link);
+        free(temp->next);
 
-        // assign the newly created link(pointer reference) to temp->link
-        temp->link = link;
+        // assign the newly created next(pointer reference) to temp->next
+        temp->next = next;
 
         totalNodes--;
         return;
@@ -187,7 +187,7 @@ public:
         for (int i = 0; i < totalNodes; i++)
         {
             cout << temp->data << "-->";
-            temp = temp->link;
+            temp = temp->next;
         }
         cout << endl;
     }
@@ -205,7 +205,7 @@ public:
         Node *curr = this->head;
         for (int i = 0; i < index; i++)
         {
-            curr = curr->link;
+            curr = curr->next;
         }
 
         return curr->data;
@@ -222,12 +222,12 @@ public:
             if (curr->data == data)
             {
                 return i;
-            } else if(curr->link == NULL)
+            } else if(curr->next == NULL)
             {
                 break;
             }
 
-            curr = curr->link;
+            curr = curr->next;
         }
         
         // This means the loop terminated without finding the data
