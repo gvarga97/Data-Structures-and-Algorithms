@@ -24,7 +24,7 @@ public:
         // Overflow check in case the limit exceeds
         if (top >= SIZE - 1)
         {
-            cout << "[WRANING]Stack Overflows" << endl;
+            cout << "[WARNING]Stack Overflows" << endl;
             return;
         }
         // increment the counter and add the data
