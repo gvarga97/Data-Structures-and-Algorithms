@@ -17,6 +17,20 @@ void stringReverse(string &line, int i = 0) {
 
 }
 
+//My version (GVG)
+void stringReverse2(string& line, std::stack<char>& myStack){
+    if(line.empty()){
+        while(!myStack.empty()){
+            line.push_back(myStack.top());
+            myStack.pop();
+        }
+        return;
+    }
+    myStack.push(line.front());
+    line.erase(line.begin());
+    stringReverse2(line, myStack);
+}
+
 int main()
 {
     string line;
@@ -25,5 +39,14 @@ int main()
 
     stringReverse(line);
     cout<<line<<endl;
+
+    //This is my version (GVG)
+    string line2;
+    cout<<"Enter string2"<<endl;
+    getline(cin, line2);   // function to use when accepting a sentence as a input.
+
+    std::stack<char> myStack;
+    stringReverse2(line2, myStack);
+    cout<<line2<<endl;
     return 0;
 }
