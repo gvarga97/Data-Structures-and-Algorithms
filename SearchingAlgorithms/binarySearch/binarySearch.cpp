@@ -9,6 +9,11 @@ using namespace std;
 
 //This function is implemented using recursion..
 void binarySearch(int arr[], int low, int high, int num){
+  //GVG: Base case is missing! Added by me!
+  if(high < low){
+    cout<<num<<"is not found!"<<endl;
+    return;
+  }
     int mid = (low+high)/2;
     if(arr[mid] == num){
         cout<<num<<" is found at index "<<mid<<endl;
